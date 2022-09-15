@@ -1,0 +1,16 @@
+
+.icon-navbar {
+    width: 30px;
+    height: 30px;
+    margin-top: -0.5rem;
+    cursor: pointer;
+}
+
+.navbar-brand {
+    cursor: pointer;
+}
+
+.active-menu {
+    color: white !important;
+    font-style: italic;
+}
