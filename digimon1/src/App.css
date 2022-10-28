@@ -1,5 +1,15 @@
 .header {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  background: rgba(242, 242, 242, 0.8);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.app-container {
+  background-image: url('./img/background.png');
+  background-repeat: repeat-y;
 }
