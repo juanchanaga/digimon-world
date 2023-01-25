@@ -1,23 +1,24 @@
-import { NavbarBrand } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import PoopA from '../../img/Poop-A.gif';
-import PoopS from '../../img/Poop-S.png';
-import EggsA from '../../img/Eggs-A.gif';
-import EggsS from '../../img/Eggs-S.png';
-import FreshA from '../../img/Fresh-A.gif';
-import FreshS from '../../img/Fresh-S.png';
-import inTrainingA from '../../img/In-Training-A.gif';
-import inTrainingS from '../../img/In-Training-S.png';
-import RookieA from '../../img/Rookie-A.gif';
-import RookieS from '../../img/Rookie-S.png';
-import ChampionA from '../../img/Champion-A.gif';
-import ChampionS from '../../img/Champion-S.png';
-import UltimateA from '../../img/Ultimate-A.gif';
-import UltimateS from '../../img/Ultimate-S.png';
+import { Nav } from 'react-bootstrap';
+import PoopA from '../../img/HeaderIcons/Poop-A.gif';
+import PoopS from '../../img/HeaderIcons/Poop-S.png';
+import EggsA from '../../img/HeaderIcons/Eggs-A.gif';
+import EggsS from '../../img/HeaderIcons/Eggs-S.png';
+import FreshA from '../../img/HeaderIcons/Fresh-A.gif';
+import FreshS from '../../img/HeaderIcons/Fresh-S.png';
+import inTrainingA from '../../img/HeaderIcons/In-Training-A.gif';
+import inTrainingS from '../../img/HeaderIcons/In-Training-S.png';
+import RookieA from '../../img/HeaderIcons/Rookie-A.gif';
+import RookieS from '../../img/HeaderIcons/Rookie-S.png';
+import ChampionA from '../../img/HeaderIcons/Champion-A.gif';
+import ChampionS from '../../img/HeaderIcons/Champion-S.png';
+import UltimateA from '../../img/HeaderIcons/Ultimate-A.gif';
+import UltimateS from '../../img/HeaderIcons/Ultimate-S.png';
 import './header.css';
+import { useEffect } from 'react';
 
-function Header() {
+function Header({ setUrl }) {
   const headerLinks = [
     {
       name: 'Home',
@@ -70,9 +71,15 @@ function Header() {
     },
   ];
 
-  const activeMenu = (textMenu, links) => {
-    console.log(textMenu[0]);
-    console.log(links);
+  useEffect(() => {
+    reloadActiveMenu();
+  });
+
+  const activeMenu = (links) => {
+    window.history.pushState('', '', links.link);
+    setUrl(window.location.pathname);
+    const iconBar = document.querySelectorAll('[id^="iconBar-"]');
+    const textMenu = document.querySelectorAll('[id^="textMenu-"]');
 
     textMenu.forEach((text) => {
       if (text.childNodes[0].alt === links.alt) {
@@ -81,50 +88,44 @@ function Header() {
         text.classList.remove('active-menu');
       }
     });
-  };
 
-  const animatedIcon = (element, iconBar) => {
     iconBar.forEach((icon, key) => {
-      if (element.target.src !== undefined) {
-        if (element.target.alt === icon.alt) {
-          element.target.src = headerLinks[key].imgActive;
-        } else {
-          icon.src = headerLinks[key].imgStatic;
-        }
+      if (icon.alt === links.alt) {
+        icon.src = links.imgActive;
       } else {
-        if (element.target.childNodes[0].alt === icon.alt) {
-          element.target.childNodes[0].src = headerLinks[key].imgActive;
-        } else {
-          icon.src = headerLinks[key].imgStatic;
-        }
+        icon.src = headerLinks[key].imgStatic;
       }
     });
   };
 
-  const activeIcon = (element, links) => {
-    window.history.pushState('', '', links.link);
-    const iconBar = document.querySelectorAll('[id^="iconBar-"]');
-    const textMenu = document.querySelectorAll('[id^="textMenu-"]');
-    animatedIcon(element, iconBar);
-    activeMenu(textMenu, links);
+  const reloadActiveMenu = () => {
+    headerLinks.forEach((links) => {
+      if (links.link === window.location.pathname) {
+        activeMenu(links);
+      }
+    });
   };
 
   return (
     <div className="w-100">
-      <Navbar bg="secondary" variant="light">
+      <Navbar collapseOnSelect expand="lg">
         <Container>
-          {headerLinks.map((links) => {
-            return (
-              <NavbarBrand
-                id={`textMenu-${links.name}`}
-                key={links.name}
-                onClick={(element) => activeIcon(element, links)}
-              >
-                <img id={`iconBar-${links.name}`} src={links.imgStatic} className="icon-navbar" alt={links.alt} />
-                {links.name}
-              </NavbarBrand>
-            );
-          })}
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            {headerLinks.map((links) => {
+              return (
+                <Nav
+                  id={`textMenu-${links.name}`}
+                  key={links.name}
+                  onClick={() => activeMenu(links)}
+                  className="me-auto"
+                >
+                  <img id={`iconBar-${links.name}`} src={links.imgStatic} className="icon-navbar" alt={links.alt} />
+                  {links.name}
+                </Nav>
+              );
+            })}
+          </Navbar.Collapse>
         </Container>
       </Navbar>
     </div>
