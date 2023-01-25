@@ -1,14 +1,19 @@
 import Header from './commons/Header/Header';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import DigiEvoList from './views/DigiEvoList/DigiEvoList';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const [url, setUrl] = useState(window.location.pathname);
+
   return (
-    <div>
-      <div className="header">
-        <Header />
+    <div className="app-container">
+      <div className="header sticky-top">
+        <Header setUrl={setUrl} />
       </div>
-      <div>Hello World</div>
+      <div className="pb-2">
+        <DigiEvoList url={url} />
+      </div>
     </div>
   );
 }
