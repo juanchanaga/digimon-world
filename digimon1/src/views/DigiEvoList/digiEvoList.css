@@ -1,0 +1,55 @@
+.dynamic-container {
+  margin: 2rem;
+  background: rgba(242, 242, 242, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4.5px);
+  -webkit-backdrop-filter: blur(4.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-family: var(--bs-font-monospace);
+}
+
+.col,
+.col-4 {
+  border: solid 1px rgba(217, 111, 50);
+  align-self: stretch;
+}
+
+.digimon-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-row {
+  font-weight: bolder;
+  text-align: center;
+  font-size: larger;
+}
+
+.image {
+  margin-top: 1rem;
+  width: 38%;
+}
+
+.image-to {
+  margin-top: 1rem;
+  width: 60%;
+}
+
+.text {
+  margin: auto;
+  font-size: large;
+}
+
+.row-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.title-row {
+  font-weight: bolder;
+  display: flex;
+  justify-content: center;
+}
